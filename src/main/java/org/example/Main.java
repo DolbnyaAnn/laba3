@@ -1,17 +1,40 @@
 package org.example;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import java.io.FileReader;
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        Gson gson=new Gson();
+        try(FileReader reader = new FileReader("C:\\work\\laba3\\src\\main\\java\\org\\example\\books.json")){
+            Type visitorListType = new TypeToken<List<Visitor>>() {}.getType();
+// Читаем и парсим JSON
+            List<Visitor> visitors = gson.fromJson(reader, visitorListType);
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+// Выводим данные для проверки
+            for (Visitor visitor : visitors) {
+                System.out.println("Имя: " + visitor.getFirstName());
+                System.out.println("Фамилия: " + visitor.getLastName());
+                System.out.println("Телефон: " + visitor.getPhoneNumber());
+                System.out.println("Подписан на рассылку: " + visitor.isSubscribed());
+
+                System.out.println("Любимые книги:");
+                for (Book book : visitor.getFavoriteBooks()) {
+                    System.out.println("Название: " + book.getTitle());
+                    System.out.println("Автор: " + book.getAuthor());
+                    System.out.println("Год: " + book.getYear());
+                    System.out.println("ISBN: " + book.getIsbn());
+                    System.out.println("Издатель: " + book.getPublisher());
+                }
+                System.out.println("--------------------");
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
