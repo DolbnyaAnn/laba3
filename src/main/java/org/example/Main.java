@@ -91,7 +91,7 @@ public class Main {
             }.getType();
             return gson.fromJson(reader, visitorListType);
         } catch (IOException e) {
-            System.out.println(e.toString());
+            System.out.println(e.getMessage());
             return null;
         }
     }
