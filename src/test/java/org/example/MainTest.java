@@ -12,7 +12,8 @@ class MainTest {
     List <Visitor> visitorsData;
     @BeforeEach
     void setUp() {
-        visitorsData = Main.ParseFile("C:\\work\\laba3\\src\\main\\java\\org\\example\\books.json");
+        String dir = System.getProperty("user.dir");
+        visitorsData = Main.ParseFile(dir+"\\src\\main\\java\\org\\example\\"+"books.json");
     }
 
     @Test
