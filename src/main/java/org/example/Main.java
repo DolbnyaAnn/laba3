@@ -14,7 +14,8 @@ import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
-        List<Visitor> visitorsData = ParseFile("C:\\work\\laba3\\src\\main\\java\\org\\example\\books.json");
+        String dir = System.getProperty("user.dir");
+        List<Visitor> visitorsData = ParseFile(dir+"\\src\\main\\java\\org\\example\\books.json");
         if (visitorsData != null) {
             System.out.println("Задание 1");
             getVisitorNames(visitorsData).forEach(System.out::println);
